@@ -1,5 +1,5 @@
 import { client } from './sanity' // کلاینتی که در مرحله قبل ساختیم
-import { Post } from '../domain/types'
+import { Post } from '@/domain/types'
 import { groq } from 'next-sanity' // ابزار کمکی برای نوشتن کوئری‌های GROQ
 
 const postFields = groq`
@@ -8,9 +8,8 @@ const postFields = groq`
   "slug": slug.current,
   mainImage,
   publishedAt,
-  "authorName": author->name
+  "author": author->{name, picture}
 `
-
 export async function getAllPosts(): Promise<Post[]> {
   const posts = await client.fetch(
     groq`*[_type == "post"] | order(publishedAt desc) {

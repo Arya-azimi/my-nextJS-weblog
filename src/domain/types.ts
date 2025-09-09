@@ -1,4 +1,4 @@
-import type { Image as SanityImage, Slug as SanitySlug } from 'sanity'
+import type { Image as SanityImage } from 'sanity'
 import type { PortableTextBlock } from '@portabletext/types'
 
 export interface Author {
@@ -13,7 +13,7 @@ export interface Post {
   _createdAt: string
 
   title: string
-  slug: SanitySlug
+  slug: string
   mainImage: SanityImage
   author: Author
   publishedAt: string
