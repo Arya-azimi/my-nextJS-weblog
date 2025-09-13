@@ -34,7 +34,7 @@ export default async function PostPage({ params }: Props) {
           </div>
         )}
         <p className="text-lg text-gray-600 dark:text-gray-400">
-          By {post.author.name}
+          نویسنده : {post.author.name}
         </p>
       </div>
       <div className="relative mx-auto my-8 h-96 w-full">

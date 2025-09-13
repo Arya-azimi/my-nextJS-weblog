@@ -13,13 +13,11 @@ export default function PostCard({ post }: Props) {
   }
 
   return (
-    // 1. از `group` برای کنترل کردن جلوه‌های hover روی فرزندان استفاده می‌کنیم
     <Link
-      href={`/${post.slug}`}
+      href={`/articles/${post.slug}`}
       className="group block overflow-hidden rounded-lg shadow-lg transition-all duration-300 ease-in-out hover:shadow-2xl dark:shadow-gray-800"
     >
       <article className="relative">
-        {/* 2. کانتینر تصویر برای کنترل بهتر */}
         <div className="relative h-56 w-full overflow-hidden">
           <Image
             src={urlFor(post.mainImage).url()}
@@ -29,14 +27,11 @@ export default function PostCard({ post }: Props) {
           />
         </div>
 
-        {/* 4. کانتینر محتوا با پس‌زمینه و پدینگ بهتر */}
         <div className="flex flex-col bg-white p-5 dark:bg-gray-900">
-          {/* 5. بهبود تایپوگرافی عنوان */}
           <h2 className="text-xl leading-tight font-bold text-gray-800 transition-colors duration-200 group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
             {post.title}
           </h2>
 
-          {/* 6. بخش اطلاعات نویسنده با طراحی بهتر */}
           <div className="mt-4 flex items-center space-x-3">
             {post.author.picture && (
               <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full">
@@ -53,7 +48,6 @@ export default function PostCard({ post }: Props) {
                 {post.author.name}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {/* 7. فرمت تاریخ خواناتر */}
                 {new Date(post.publishedAt).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
