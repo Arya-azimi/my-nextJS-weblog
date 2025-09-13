@@ -18,3 +18,14 @@ export async function getAllPosts(): Promise<Post[]> {
   )
   return posts
 }
+
+export async function getPostBySlug(slug: string): Promise<Post> {
+  const post = await client.fetch(
+    groq`*[_type == "post" && slug.current == $slug][0]{
+      "author": author->{name, picture}, // اطلاعات نویسنده را هم کامل کن
+      "slug": slug.current,
+    }`,
+    { slug },
+  )
+  return post
+}
