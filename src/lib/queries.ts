@@ -1,6 +1,6 @@
-import { client } from './sanity' // کلاینتی که در مرحله قبل ساختیم
+import { client } from './sanity'
 import { Post } from '@/domain/types'
-import { groq } from 'next-sanity' // ابزار کمکی برای نوشتن کوئری‌های GROQ
+import { groq } from 'next-sanity'
 
 const postFields = groq`
   _id,
@@ -34,4 +34,18 @@ export async function getPostBySlug(slug: string): Promise<Post> {
     { slug },
   )
   return post
+}
+
+export async function getLatestPosts(): Promise<Post[]> {
+  const posts = await client.fetch(
+    groq`*[_type == "post"] | order(publishedAt desc)[0...3] {
+      _id,
+      title,
+      "slug": slug.current,
+      mainImage,
+      publishedAt,
+      "author": author->{name, picture}
+    }`,
+  )
+  return posts
 }
